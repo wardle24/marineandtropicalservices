@@ -244,12 +244,15 @@
             </div>
 
             <div class="form-container">
-                <form action="">
-                    <input type="text" placeholder="Your full name">
-                    <input type="email" placeholder="Your email">
-                    <input type="tel" placeholder="Phone number (optional)">
-                    <input type="text" placeholder="Home address">
-                    <textarea placeholder="What can we help you with"></textarea>
+                <form name="contact" method="POST" data-netlify="true">
+                  <input type="hidden" name="form-name" value="contact">
+                  
+                    <input type="text" name="full-name" placeholder="Your full name">
+                    <input type="email" name="email" placeholder="Your email">
+                    <input type="tel" name="phone" placeholder="Phone number (optional)">
+                    <input type="text" name="address" placeholder="Home address">
+                    <textarea name="message" placeholder="What can we help you with"></textarea>
+                  
                     <button type="submit">Send</button>
                 </form>
             </div>
