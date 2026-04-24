@@ -191,3 +191,21 @@ window.addEventListener("resize", () => {
 
 renderImages();
 startAutoSwitch();
+
+//Contact form message
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop the default redirect
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch("/", {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
+    document.getElementById("success-message").style.display = "block";
+    form.reset();
+  })
+  .catch((error) => alert("There was an error submitting the form"));
+});
