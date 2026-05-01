@@ -9,6 +9,21 @@ document.querySelectorAll('.image-container').forEach(container => {
   });
 });
 
+// Gallery items animation for "Our Work" section
+const items = document.querySelectorAll('.gallery-item');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+items.forEach(item => observer.observe(item));
+
 
 // site scroll navigation
 // Select all nav links
@@ -60,18 +75,18 @@ window.addEventListener('scroll', () => {
 
 
 
-const observer = new IntersectionObserver(entries => {
+const observer2 = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add("show");
-      observer.unobserve(entry.target);
+      observer2.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
 
 setTimeout(() => {
-  document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-up, .service-card, .image-container, .ba-image-item, .process-text, .process-image, .services, .work, #process, .before-and-after, .gallery-section, #contact').forEach(el => {
-    observer.observe(el);
+  document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-up, .service-card, .image-container, .ba-image-item, .process-text, .process-image, .services, .work, #process, .before-and-after, .gallery-section, #contact, .ba-gallery-item').forEach(el => {
+    observer2.observe(el);
   });
 }, 100);
 
@@ -191,21 +206,3 @@ window.addEventListener("resize", () => {
 
 renderImages();
 startAutoSwitch();
-
-//Contact form message
-document.querySelector("form").addEventListener("submit", function(e) {
-  e.preventDefault(); // stop the default redirect
-
-  const form = e.target;
-  const formData = new FormData(form);
-
-  fetch("/", {
-    method: "POST",
-    body: formData
-  })
-  .then(() => {
-    document.getElementById("success-message").style.display = "block";
-    form.reset();
-  })
-  .catch((error) => alert("There was an error submitting the form"));
-});
